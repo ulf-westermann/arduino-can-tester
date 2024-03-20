@@ -48,7 +48,6 @@ format:
 
 .PHONY: check
 check:
-	echo $${HOME}
 	cppcheck --check-config --enable=all --suppress=missingInclude -I. $$(find . -iname '*.ino' -or -iname '*.cpp' -or -iname '*.h')
 
 .PHONY: tags
