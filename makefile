@@ -43,7 +43,6 @@ endif
 .PHONY: terminal
 terminal:
 	picocom --baud 8000000 $(PORT)
-	#picocom --baud 1152000 $(PORT)
 
 .PHONY: format
 format:
@@ -51,7 +50,7 @@ format:
 
 .PHONY: check
 check:
-	cppcheck --check-config --enable=all --suppress=missingInclude -I. $$(find . -iname '*.ino' -or -iname '*.cpp' -or -iname '*.h')
+	cppcheck --check-config --enable=all --suppress=missingInclude -I. $(INCLUDE_FLAGS) $$(find . -iname '*.ino' -or -iname '*.cpp' -or -iname '*.h')
 
 .PHONY: tags
 tags:
