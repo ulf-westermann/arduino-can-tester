@@ -6,6 +6,8 @@ FQBN = $(PACKAGER):$(ARCH):$(BOARD)
 LIBRARIES = AsyncDelay mcp_can
 #LIBRARIES += VT100
 
+INCLUDE_FLAGS = $(addprefix -I$${HOME}/Arduino/libraries/, $(LIBRARIES))
+
 BUILD_FLAGS = -DDEBUG_MODE
 
 PORT = /dev/ttyACM0
@@ -40,7 +42,8 @@ endif
 
 .PHONY: terminal
 terminal:
-	picocom --baud 1152000 $(PORT)
+	picocom --baud 8000000 $(PORT)
+	#picocom --baud 1152000 $(PORT)
 
 .PHONY: format
 format:
@@ -48,7 +51,6 @@ format:
 
 .PHONY: check
 check:
-	echo $${HOME}
 	cppcheck --check-config --enable=all --suppress=missingInclude -I. $$(find . -iname '*.ino' -or -iname '*.cpp' -or -iname '*.h')
 
 .PHONY: tags
